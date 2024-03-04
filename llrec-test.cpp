@@ -92,7 +92,7 @@ int main(int argc, char* argv[])
     // Test out your linked list code
 
     Node *smaller = nullptr, *larger = nullptr;
-    int pivot = 5; // Example pivot value
+    int pivot = 5; 
     llpivot(head, smaller, larger, pivot);
     cout << "Smaller or equal to " << pivot << ": ";
     print(smaller);

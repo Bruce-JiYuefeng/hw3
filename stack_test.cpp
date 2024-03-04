@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Stack.h" // Make sure this is the correct header file name for your Stack class
+#include "Stack.h" 
 
 int main() {
     Stack<int> myStack;
