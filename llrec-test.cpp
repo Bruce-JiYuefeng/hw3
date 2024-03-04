@@ -67,7 +67,11 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
+struct IsOdd {
+    bool operator()(int value) {
+        return value % 2 != 0;
+    }
+};
 
 
 
@@ -87,7 +91,22 @@ int main(int argc, char* argv[])
 
     // Test out your linked list code
 
+    Node *smaller = nullptr, *larger = nullptr;
+    int pivot = 5; // Example pivot value
+    llpivot(head, smaller, larger, pivot);
+    cout << "Smaller or equal to " << pivot << ": ";
+    print(smaller);
+    cout << "Larger than " << pivot << ": ";
+    print(larger);
 
+    Node* filtered = llfilter(head, IsOdd());
+    cout << "Filtered list (keeping even numbers): ";
+    print(filtered);
+
+    // Cleanup
+    dealloc(smaller);
+    dealloc(larger);
+    dealloc(filtered);
 
     
     return 0;
