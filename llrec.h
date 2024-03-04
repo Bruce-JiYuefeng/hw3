@@ -87,17 +87,17 @@ Node* llfilter(Node* head, Comp pred)
         return nullptr;
     }
 
+    // Recursively filter the rest of the list first.
     head->next = llfilter(head->next, pred);
 
     if (pred(head->val)) {
-        Node* temp = head;
-        head = head->next;
-        delete temp; 
+        Node* toDelete = head;
+        head = head->next; // Skip the current node.
+        delete toDelete; // Free the memory of the filtered node.
         return head;
     } else {
-        return head;
+        return head; // Keep the current node.
     }
-
 }
 
 #endif

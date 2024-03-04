@@ -28,34 +28,32 @@ void llpivotHelper(Node*& head, Node*& smaller, Node*& larger, int pivot) {
 }
 
 void llpivot(Node*& head, Node*& smaller, Node*& larger, int pivot) {
-    smaller = nullptr;
-    larger = nullptr;
-    Node *smallerTail = nullptr, *largerTail = nullptr; 
-
-    while (head != nullptr) {
-        Node* nextNode = head->next; 
-        head->next = nullptr; 
-        if (head->val <= pivot) {
-            if (smaller == nullptr) {
-                smaller = head;
-                smallerTail = head;
-            } else {
-                smallerTail->next = head;
-                smallerTail = head;
-            }
-        } else {
-            if (larger == nullptr) {
-                larger = head;
-                largerTail = head;
-            } else {
-                largerTail->next = head;
-                largerTail = head;
-            }
-        }
-        head = nextNode;
+    if (head == nullptr) {
+        smaller = nullptr;
+        larger = nullptr;
+        return;
     }
 
-    head = nullptr; 
-}
+    Node dummySmall(0, nullptr);
+    Node dummyLarge(0, nullptr);
+    Node* tailSmall = &dummySmall;
+    Node* tailLarge = &dummyLarge;
 
+    while (head != nullptr) {
+        Node* next = head->next;
+        if (head->val <= pivot) {
+            tailSmall->next = head;
+            tailSmall = head;
+        } else {
+            tailLarge->next = head;
+            tailLarge = head;
+        }
+        head->next = nullptr; // Detach the current node.
+        head = next;
+    }
+
+    smaller = dummySmall.next;
+    larger = dummyLarge.next;
+    head = nullptr; // Ensure the original list is marked as empty.
+}
 
